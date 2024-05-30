@@ -40,26 +40,6 @@ console.log(render('Side'));
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// Kullanıcıdan saat bilgisini alalım
-const saat = prompt("Lütfen saat bilgisini girin (örneğin 12:30):");
-
-// Saat bilgisini ayrıştıralım
-const saatParcalari = saat.split(":");
-const saatDegeri = parseInt(saatParcalari[0]);
-
-// Yemek menüsünü belirleyelim
-let yemekMenu = "";
-if (saatDegeri >= 6 && saatDegeri < 12) {
-    yemekMenu = "Kahvaltı: Yumurta, peynir, zeytin ve simit";
-} else if (saatDegeri >= 12 && saatDegeri < 18) {
-    yemekMenu = "Öğle Yemeği: Izgara tavuk, pilav ve sebzeler";
-} else {
-    yemekMenu = "Akşam Yemeği: Balık, makarna ve salata";
-}
-
-// Kullanıcıya sonucu gösterelim
-alert(yemekMenu);
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -109,6 +89,7 @@ const menu = {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   
+   // SAATI OTOMATIK AYARLIYOR current tıme gore
   // Define menu items and their prices
 const menu = {
     breakfast: [
@@ -148,6 +129,72 @@ if (hour >= 6 && hour < 12) {
 } else {
     mealtime = "dinner";
 }
+
+// Simulate waiter's comment
+const waiterComment = `Welcome! It's ${mealtime} time. Our menu includes:`;
+
+// Display menu items
+let menuText = `${waiterComment}\n`;
+for (const item of menu[mealtime]) {
+    menuText += `${item.name} - $${item.price.toFixed(2)}\n`;
+}
+
+// Confirm selection
+const confirmSelection = confirm(menuText + "\nWould you like to proceed with this menu?");
+if (confirmSelection) {
+    // Calculate total price
+    const totalPrice = menu[mealtime].reduce((total, item) => total + item.price, 0);
+    alert(`Total price: $${totalPrice.toFixed(2)}`);
+} else {
+    alert("Thank you for visiting! Have a great day!");
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+   // SAATI KULLANICIDAN ISTIYORUZ
+  // Define menu items and their prices
+  const menu = {
+    breakfast: [
+        { name: "Pancakes", price: 8.99 },
+        { name: "Omelette", price: 9.99 },
+      { name: "Patatas to", price: 9.99 },
+        // Add more breakfast items here
+    ],
+    lunch: [
+        { name: "Burger", price: 10.99 },
+        { name: "Salad", price: 7.99 },
+        // Add more lunch items here
+    ],
+    dinner: [
+        { name: "Steak", price: 19.99 },
+        { name: "Pasta", price: 14.99 },
+        // Add more dinner items here
+    ],
+};
+
+// Kullanıcıdan saat bilgisini al
+const userHour = prompt("Lütfen saat bilgisini girin (örn. 14:30):");
+
+// Saati ayrıştır ve saat kısmını al
+const hourParts = userHour.split(":");
+const hour = parseInt(hourParts[0]);
+
+let mealtime;
+if (hour >= 6 && hour < 12) {
+    mealtime = "breakfast";
+} else if (hour >= 12 && hour < 16) {
+    mealtime = "lunch";
+} else {
+    mealtime = "dinner";
+}
+
+// Kullanıcıya öğünü bildir
+alert(`Şu an ${mealtime} zamanıdır.`);
+
+
+// Determine the mealtime based on the current hour
+
 
 // Simulate waiter's comment
 const waiterComment = `Welcome! It's ${mealtime} time. Our menu includes:`;
