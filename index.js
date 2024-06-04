@@ -14,7 +14,7 @@ class RestaurantMenu {
               ],
               desserts: [
                   { name: "Cafe", price: 3 },
-                 { name: "Zumo", price: 3 },
+                  { name: "Zumo", price: 3 },
                   { name: "Infusion", price: 3 }
               ]
           },
@@ -86,16 +86,19 @@ class RestaurantMenu {
       alert(menuString);
   }
 
-  selectItem(menu, category, selection) {
-      const item = menu[category].find(item => item.name.toLowerCase() === selection.toLowerCase());
-      if (item) {
-          const comment = this.comments[Math.floor(Math.random() * this.comments.length)];
-          alert(`You selected ${item.name}. ${comment} It costs €${item.price}.`);
-          return item;
-      } else {
-          alert("Item not found.");
-          return null;
+  selectItem(menu, category) {
+      let item = null;
+      while (!item) {
+          const selection = prompt(`Please select a ${category.slice(0, -1)}:`);
+          item = menu[category].find(item => item.name.toLowerCase() === selection.toLowerCase());
+          if (item) {
+              const comment = this.comments[Math.floor(Math.random() * this.comments.length)];
+              alert(`You selected ${item.name}. ${comment} It costs €${item.price}.`);
+          } else {
+              alert("Item not found. Please select again.");
+          }
       }
+      return item;
   }
 
   getOrder(hour) {
@@ -112,19 +115,16 @@ class RestaurantMenu {
       let selectedItems = [];
 
       // Select starter
-      const starter = prompt("Please select a starter:");
-      const selectedStarter = this.selectItem(menu, 'starters', starter);
-      if (selectedStarter) selectedItems.push(selectedStarter);
+      const selectedStarter = this.selectItem(menu, 'starters');
+      selectedItems.push(selectedStarter);
 
       // Select main
-      const main = prompt("Please select a main:");
-      const selectedMain = this.selectItem(menu, 'mains', main);
-      if (selectedMain) selectedItems.push(selectedMain);
+      const selectedMain = this.selectItem(menu, 'mains');
+      selectedItems.push(selectedMain);
 
       // Select dessert
-      const dessert = prompt("Please select a dessert:");
-      const selectedDessert = this.selectItem(menu, 'desserts', dessert);
-      if (selectedDessert) selectedItems.push(selectedDessert);
+      const selectedDessert = this.selectItem(menu, 'desserts');
+      selectedItems.push(selectedDessert);
 
       let orderDetails = "Your order details:\n";
       selectedItems.forEach(item => {
@@ -132,7 +132,7 @@ class RestaurantMenu {
           orderDetails += `${item.name}: €${item.price}\n`;
       });
 
-      orderDetails += `\nTotal: $${total}`;  
+      orderDetails += `\nTotal: €${total}`;
       alert(orderDetails);
   }
 
