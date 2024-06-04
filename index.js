@@ -4,48 +4,58 @@ class RestaurantMenu {
           breakfast: {
               starters: [
                   { name: "Fruit Salad", price: 5 },
-                  { name: "Yogurt Parfait", price: 4 }
+                  { name: "Tortillas", price: 4 },
+                  { name: "Croissant", price: 4 }
               ],
               mains: [
                   { name: "Pancakes", price: 6 },
+                  { name: "Muffin", price: 3 },
                   { name: "Omelette", price: 7 }
               ],
               desserts: [
-                  { name: "Muffin", price: 3 },
-                  { name: "Croissant", price: 3 }
+                  { name: "Cafe", price: 3 },
+                 { name: "Zumo", price: 3 },
+                  { name: "Infusion", price: 3 }
               ]
           },
           lunch: {
               starters: [
                   { name: "Soup", price: 5 },
+                  { name: "Pasta", price: 3 },
                   { name: "Salad", price: 4 }
               ],
               mains: [
-                  { name: "Burger", price: 8 },
+                  { name: "Hamburgesa", price: 8 },
+                  { name: "Pescado", price: 3 },
+                  { name: "Carne", price: 3 },
                   { name: "Grilled Chicken", price: 9 }
               ],
               desserts: [
                   { name: "Ice Cream", price: 4 },
+                  { name: "Cafe", price: 3 },
                   { name: "Brownie", price: 5 }
               ]
           },
           dinner: {
               starters: [
                   { name: "Bruschetta", price: 6 },
+                  { name: "Gazpacho", price: 3 },
                   { name: "Stuffed Mushrooms", price: 7 }
               ],
               mains: [
                   { name: "Steak", price: 15 },
+                  { name: "Pollo", price: 3 },
                   { name: "Salmon", price: 14 }
               ],
               desserts: [
                   { name: "Cheesecake", price: 6 },
+                  { name: "Cafe", price: 3 },
                   { name: "Tiramisu", price: 7 }
               ]
           }
       };
       this.comments = [
-          "Excellent choice!",
+          "Uhmm...Excellent choice!",
           "A popular item!",
           "You have a great taste!",
           "One of my favorites!"
@@ -63,15 +73,15 @@ class RestaurantMenu {
       const menu = this.menus[menuType];
       let menuString = `${menuType.charAt(0).toUpperCase() + menuType.slice(1)} Menu:\n\nStarters:\n`;
       menu.starters.forEach(item => {
-          menuString += `${item.name}: $${item.price}\n`;
+          menuString += `${item.name}: €${item.price}\n`;
       });
       menuString += `\nMains:\n`;
       menu.mains.forEach(item => {
-          menuString += `${item.name}: $${item.price}\n`;
+          menuString += `${item.name}: €${item.price}\n`;
       });
       menuString += `\nDesserts:\n`;
       menu.desserts.forEach(item => {
-          menuString += `${item.name}: $${item.price}\n`;
+          menuString += `${item.name}: €${item.price}\n`;
       });
       alert(menuString);
   }
@@ -80,7 +90,7 @@ class RestaurantMenu {
       const item = menu[category].find(item => item.name.toLowerCase() === selection.toLowerCase());
       if (item) {
           const comment = this.comments[Math.floor(Math.random() * this.comments.length)];
-          alert(`You selected ${item.name}. ${comment} It costs $${item.price}.`);
+          alert(`You selected ${item.name}. ${comment} It costs €${item.price}.`);
           return item;
       } else {
           alert("Item not found.");
@@ -119,10 +129,10 @@ class RestaurantMenu {
       let orderDetails = "Your order details:\n";
       selectedItems.forEach(item => {
           total += item.price;
-          orderDetails += `${item.name}: $${item.price}\n`;
+          orderDetails += `${item.name}: €${item.price}\n`;
       });
 
-      orderDetails += `\nTotal: $${total}`;
+      orderDetails += `\nTotal: $${total}`;  
       alert(orderDetails);
   }
 
